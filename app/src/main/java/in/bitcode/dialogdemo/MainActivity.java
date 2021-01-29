@@ -4,18 +4,20 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mBtnAlert, mBtnTime, mBtnDate;
+    private Button mBtnAlert, mBtnTime, mBtnDate, mBtnCustom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +31,46 @@ public class MainActivity extends AppCompatActivity {
         mBtnAlert = findViewById(R.id.btnAlert);
         mBtnDate = findViewById(R.id.btnDate);
         mBtnTime = findViewById(R.id.btnTime);
+        mBtnCustom = findViewById(R.id.btnCustom);
 
         mBtnAlert.setOnClickListener(new BtnAlertClickListener());
         mBtnDate.setOnClickListener(new BtnDateClickListener());
         mBtnTime.setOnClickListener(new BtnTimeClickListener());
+        mBtnCustom.setOnClickListener(new BtnCustomClickListener());
+    }
+
+    private class BtnCustomClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+
+            EditText edtUsername, edtPassword;
+            Button btnSignIn;
+
+            Dialog loginDialog = new Dialog(MainActivity.this);
+            loginDialog.setTitle("BitCode Login");
+            loginDialog.setContentView(R.layout.login);
+
+            edtUsername = loginDialog.findViewById(R.id.edtUsername);
+            edtPassword = loginDialog.findViewById(R.id.edtPassword);
+            btnSignIn = loginDialog.findViewById(R.id.btnSignIn);
+
+            btnSignIn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(edtUsername.getText().toString().equals("vishal")) {
+                        mt("Sign In Successful");
+                        loginDialog.dismiss();
+                    }
+                    else {
+                        mt("Sign In Not Successful");
+                    }
+                }
+            });
+
+            loginDialog.show();
+
+
+        }
     }
 
     private class BtnTimeClickListener implements View.OnClickListener {

@@ -25,4 +25,10 @@
         android:text="Time Picker Dialog"
         android:id="@+id/btnTime" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Custom Dialog"
+        android:id="@+id/btnCustom" />
+
 </LinearLayout>
